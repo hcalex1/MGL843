@@ -3,12 +3,14 @@
 BASEDIR=$(pwd)
 
 col_a='Source'
-INPUT=$BASEDIR/inputs-outputs/pharo_inputs.csv
+INPUT=$BASEDIR/inputs-outputs/repo_list.csv
 OUTPUT=$BASEDIR/inputs-outputs/git_logs.txt
 
 echo "" > $OUTPUT
 
 loc_col_a=$(head -1 $INPUT | tr ',' '\n' | nl |grep -w "$col_a" | tr -d " " | awk -F " " '{print $1}')
+
+git config diff.renameLimit 999999
 
 while IFS="," read -r rec1
 do
