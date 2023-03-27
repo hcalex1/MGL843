@@ -2,25 +2,31 @@
 
 ## Setup
 
-Clone the project:
+1. Clone the project:
 ```
 git clone https://github.com/hcalex1/MGL843.git
 cd MGL843
 ```
 The list of GitHub repositories for this analysis can be found in `inputs-outputs/repos.txt`.
 
-Clone FamixTypeScriptImporter:
+2. Clone FamixTypeScriptImporter:
 ```
 git clone https://github.com/dig2root/FamixTypeScriptImporter.git
 ```
 
-Download and extract Pharo:
+3. Download [Pharo](https://pharo.org/download) and launch it. 
+
+4. Create a Moose Suite 10 image inside Pharo and launch it.
+
+5. Import the [FamixTypeScript metamodel](https://github.com/dig2root/FamixTypeScript). This can be done from the Moose Playground:
 ```
-wget https://files.pharo.org/pharo-launcher/linux64
-unzip PharoLauncher-linux-*.zip
+Metacello new 
+    githubUser: 'dig2root' project: 'FamixTypeScript' commitish: 'master' path: 'src';
+    baseline: 'FamixTypeScript';
+    load.
 ```
 
-Install Moose in Pharo. Next open Moose and import the [FamixTypeScript metamodel](https://github.com/dig2root/FamixTypeScript) and the [metrics generation package](https://github.com/dig2root/PharoPackageMGL843). *TODO: expand on this* 
+6. Add the [metrics generation package](https://github.com/dig2root/PharoPackageMGL843) with Iceberg (`Ctrl+O+I`). 
 
 *TODO: insert flow diagram*
 
