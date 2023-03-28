@@ -2,16 +2,38 @@
 
 BASEDIR=$(pwd)
 
-col_a='Source'
-INPUT=$BASEDIR/inputs-outputs/repo_list.csv
-OUTPUT=$BASEDIR/inputs-outputs/git_logs.txt
+OUTPUT=$BASEDIR/git_logs.txt
 
+# Loop through arguments and process them
+for arg in "$@"
+do
+    case $arg in
+
+        -i|--input)
+        INPUT=$(realpath $2)
+        shift
+        shift
+        ;;
+
+        -o|--output)
+        OUTPUT=$(realpath $2)
+        shift
+        shift
+        ;;
+
+    esac
+done
+
+# Init output file
 echo "" > $OUTPUT
 
+# Define input CSV format
+col_a='Source'
 loc_col_a=$(head -1 $INPUT | tr ',' '\n' | nl |grep -w "$col_a" | tr -d " " | awk -F " " '{print $1}')
 
 git config diff.renameLimit 999999
 
+# Parse input CSV and get git logs
 while IFS="," read -r rec1
 do
   cd $rec1
