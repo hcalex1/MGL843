@@ -3,15 +3,41 @@
 BASEDIR=$(pwd)
 TS2FAMIXDIR=/tmp/FamixTypeScriptImporter
 TS2FAMIX=$TS2FAMIXDIR/src/ts2famix-cli.ts
-REPOS=$BASEDIR/repos
-MODELS=$BASEDIR/inputs-outputs/models
-REPO_LIST=$BASEDIR/inputs-outputs/repos.txt
+REPOS=/tmp/repos
+
+# Loop through arguments and process them
+for arg in "$@"
+do
+    case $arg in
+
+        -i|--input)
+        REPO_LIST="$2"
+        shift
+        shift
+        ;;
+
+        -o|--output)
+        MODELS="$2"
+        shift
+        shift
+        ;;
+
+        -c|--clone-dir)
+        REPOS="$2"
+        shift
+        shift
+        ;;
+
+    esac
+done
 
 # Clone FamixTypeScriptImporter repo
 git clone https://github.com/dig2root/FamixTypeScriptImporter.git $TS2FAMIXDIR
+cd $TS2FAMIXDIR && npm install ; cd $BASEDIR
 
 #Init CSV
-CSV=$BASEDIR/inputs-outputs/repo_list.csv
+mkdir -p $MODELS
+CSV=$MODELS/repo_list.csv
 echo "Project,Source,Model" > $CSV
 
 # Iterate each GitHub repo
@@ -28,8 +54,11 @@ cat $REPO_LIST | while read line; do
   # Create model
   ts-node $TS2FAMIX -i "$source/**/*.ts" -o $model
 
-  # Write paths to csv
-  echo "$char2,$source,$model" >> $CSV
+  # Write paths to csv if successful
+  if [ -f "$model" ]
+  then
+    echo "$char2,$source,$model" >> $CSV
+  fi
 done
 
 rm -rf $TS2FAMIXDIR
