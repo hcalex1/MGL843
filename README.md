@@ -27,19 +27,19 @@ Metacello new
 
 ## 1. Clone Repos and Generate Famix Models
 
-Clone the GitHub repositories listed in `inputs-outputs/repos.txt` to `repos/`, generate a Famix TypeScript model for each and saving them to `inputs-outputs/models` (this also generates `inputs-outputs/repo_list.csv` containing the paths to each repository's source code and Famix model)::
+Clone the GitHub repositories listed in `inputs-outputs/repos.txt` to `repos/`, generate a Famix TypeScript model for each and saving them to `inputs-outputs/models` (this also generates `inputs-outputs/models/repo_list.csv` containing the paths to each repository's source code and Famix model)::
 ```
-./scripts/prepare_repos.sh
+./scripts/prepare_repos.sh -c repos -i ./inputs-outputs/repos.txt -o inputs-outputs/models
 ```
 
 ## 2. Generate Class Metrics
 *TODO in pharo*
 
 ## 3. Get git logs
-Save git logs to `inputs-outputs/git_logs.txt` and parse them to `inputs-outputs/commits.csv`:
+Save git logs of projects in `inputs-outputs/models/repo_list.csv` to `inputs-outputs/git_logs.txt` and parse them to `inputs-outputs/commits.csv`:
 ```
-./scripts/get_git_logs.sh
-python scripts/parse_git_logs.py
+./scripts/get_git_logs.sh -i inputs-outputs/models/repo_list.csv -o inputs-outputs/git_logs.txt
+python scripts/parse_git_logs.py -i inputs-outputs/git_logs.txt -o inputs-outputs/commits.csv
 ```
 
 ## 4. Analysis
