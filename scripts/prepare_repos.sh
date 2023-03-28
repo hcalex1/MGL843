@@ -3,6 +3,7 @@
 BASEDIR=$(pwd)
 TS2FAMIXDIR=/tmp/FamixTypeScriptImporter
 TS2FAMIX=$TS2FAMIXDIR/src/ts2famix-cli.ts
+MODELS=$BASEDIR
 REPOS=/tmp/repos
 
 # Loop through arguments and process them
