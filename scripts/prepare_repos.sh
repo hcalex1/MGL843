@@ -12,19 +12,19 @@ do
     case $arg in
 
         -i|--input)
-        REPO_LIST="$2"
+        REPO_LIST=$2
         shift
         shift
         ;;
 
         -o|--output)
-        MODELS="$2"
+        MODELS=$(realpath $2)
         shift
         shift
         ;;
 
         -c|--clone-dir)
-        REPOS="$2"
+        REPOS=$(realpath $2)
         shift
         shift
         ;;
