@@ -5,7 +5,6 @@
 1. Clone the project:
 ```
 git clone https://github.com/hcalex1/MGL843.git
-cd MGL843
 ```
 The list of GitHub repositories for this analysis can be found in `inputs-outputs/repos.txt`.
 
@@ -13,7 +12,8 @@ The list of GitHub repositories for this analysis can be found in `inputs-output
 
 3. Create a Moose Suite 10 image inside Pharo and launch it.
 
-4. Import the [FamixTypeScript metamodel](https://github.com/dig2root/FamixTypeScript). This can be done from the Moose Playground:
+4. Import the FamixTypeScript metamodel. Open the Moose Playground with `Ctrl+O+W` and run the following script:
+
 ```
 Metacello new 
     githubUser: 'dig2root' project: 'FamixTypeScript' commitish: 'master' path: 'src';
@@ -21,7 +21,13 @@ Metacello new
     load.
 ```
 
-5. Add the [metrics generation package](https://github.com/dig2root/PharoPackageMGL843) with Iceberg (`Ctrl+O+I`). 
+5. Add the [metrics generation package](https://github.com/dig2root/PharoPackageMGL843) with Iceberg. 
+    1. Open Iceberg with `Ctrl+O+I` or by going to **Sources > Iceberg**.
+    2. Click on **Add**.
+    3. Select the **Clone From github.com** tab.
+    4. Enter *dig2root* in the **Owner name** field, *PharoPackageMGL843* in the **Project name** field, *HTTPS* in the **Protocol** field and click on **OK**.
+    5. In the *Iceberg* window, double click on **PharoPackageMGL843**.
+    6. In the pop-up window right-click on **MGL843-Core** and select **Load**
 
 *TODO: insert flow diagram*
 
