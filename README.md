@@ -39,7 +39,22 @@ Clone the GitHub repositories listed in `inputs-outputs/repos.txt` to `repos/`, 
 ```
 
 ## 2. Generate Class Metrics
-*TODO in pharo*
+Open the Moose Playground with `Ctrl+O+W` and run the following script:
+```
+| repoListFile metricsOutputFile |
+
+repoListFile := '/home/school/MGL843/inputs-outputs/models/repo_list.csv' asFileReference.
+metricsOutputFile := '/home/school/MGL843/inputs-outputs/metrics.csv' asFileReference.
+
+"Remove all previously imported models"
+MooseModel resetRoot.
+
+"Imports models listed in repoListFile"
+ClassMetricsCsvGenerator importFamixTypeScriptModels: repoListFile.
+
+"Exports class metrics in CSV format to metricsOutputFile"
+ClassMetricsCsvGenerator writeToFile: metricsOutputFile.
+```
 
 ## 3. Get git logs
 Save git logs of projects in `inputs-outputs/models/repo_list.csv` to `inputs-outputs/git_logs.txt` and parse them to `inputs-outputs/commits.csv`:
