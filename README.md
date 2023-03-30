@@ -3,7 +3,7 @@
 ## Setup
 
 1. Clone the project:
-```
+```sh
 git clone https://github.com/hcalex1/MGL843.git
 ```
 The list of GitHub repositories for this analysis can be found in `inputs-outputs/repos.txt`.
@@ -14,7 +14,7 @@ The list of GitHub repositories for this analysis can be found in `inputs-output
 
 4. Import the FamixTypeScript metamodel. Open the Moose Playground with `Ctrl+O+W` and run the following script:
 
-```
+```ts
 Metacello new 
     githubUser: 'dig2root' project: 'FamixTypeScript' commitish: 'master' path: 'src';
     baseline: 'FamixTypeScript';
@@ -34,13 +34,13 @@ Metacello new
 ## 1. Clone Repos and Generate Famix Models
 
 Clone the GitHub repositories listed in `inputs-outputs/repos.txt` to `repos/`, generate a Famix TypeScript model for each and saving them to `inputs-outputs/models` (this also generates `inputs-outputs/models/repo_list.csv` containing the paths to each repository's source code and Famix model)::
-```
+```sh
 ./scripts/prepare_repos.sh -c repos -i ./inputs-outputs/repos.txt -o inputs-outputs/models
 ```
 
 ## 2. Generate Class Metrics
 Open the Moose Playground with `Ctrl+O+W` and run the following script:
-```
+```st
 | repoListFile metricsOutputFile |
 
 repoListFile := '/home/school/MGL843/inputs-outputs/models/repo_list.csv' asFileReference.
@@ -58,7 +58,7 @@ ClassMetricsCsvGenerator writeToFile: metricsOutputFile.
 
 ## 3. Get git logs
 Save git logs of projects in `inputs-outputs/models/repo_list.csv` to `inputs-outputs/git_logs.txt` and parse them to `inputs-outputs/commits.csv`:
-```
+```sh
 ./scripts/get_git_logs.sh -i inputs-outputs/models/repo_list.csv -o inputs-outputs/git_logs.txt
 python scripts/parse_git_logs.py -i inputs-outputs/git_logs.txt -o inputs-outputs/commits.csv
 ```
