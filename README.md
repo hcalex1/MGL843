@@ -34,8 +34,15 @@ Metacello new
 ## 1. Clone Repos and Generate Famix Models
 
 Clone the GitHub repositories listed in `inputs-outputs/repos.txt` to `repos/`, generate a Famix TypeScript model for each and saving them to `inputs-outputs/models` (this also generates `inputs-outputs/models/repo_list.csv` containing the paths to each repository's source code and Famix model)::
+
+Pour Linux:
 ```sh
-./scripts/prepare_repos.sh -c repos -i ./inputs-outputs/repos.txt -o inputs-outputs/models
+./scripts/prepare_repos.sh -c repos -i ./inputs-outputs/repos_linux.txt -o inputs-outputs/models
+```
+
+Pour Windows:
+```sh
+./scripts/prepare_reposWin.sh -c repos -i ./inputs-outputs/repos_windows.txt -o inputs-outputs/models
 ```
 
 ## 2. Generate Class Metrics
